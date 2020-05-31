@@ -3,6 +3,10 @@ library(lubridate)
 library(RPostgres)
 library(data.table)
 
+# NOTE - THIS FILE WILL GIVE YOU A DATASET THAT GOES FROM PERMNO/DATE -> GVKEY.
+# BECAUSE A COMPANY MIGHT HAVE MULTIPLE PERMNOS THIS WILL NOT NECESSARILY EQUAL 
+# GVKEY/DATE -> PERMNO
+
 # Connect to WRDS Server --------------------------------------------------
 wrds <- dbConnect(Postgres(),
                   host = 'wrds-pgdata.wharton.upenn.edu',
@@ -11,12 +15,6 @@ wrds <- dbConnect(Postgres(),
                   password = '',
                   dbname = 'wrds',
                   sslmode = 'require')
-
-# download compustat data
-comp <- tbl(wrds, sql("SELECT * FROM comp.funda")) %>%
-  # filter the bullshit as per usual
-  filter(indfmt == 'INDL' & datafmt == 'STD' & popsrc == 'D' & consol == 'C') %>% 
-  collect()
 
 # download the link file from wrds
 # get the CRSP - Compustat link file
@@ -43,15 +41,7 @@ link <- link %>%
   setDT()
 
 # set key in data table to make this go faster
-setkey(link, gvkey, datadate)
-
-link <- link %>% 
-  .[, count := .N, by = list(gvkey, datadate)] %>% 
-  .[count == 1 | linkprim == "P"] %>% 
-  .[, count := NULL]
-
-# bring in link variable to compustat
-comp <- left_join(comp, link %>% as_tibble(), by = c("gvkey", "datadate"))
+setkey(link, permno, datadate)
 
 # bring in names and ticker
 names <- tbl(wrds, sql("SELECT * FROM crsp.dsenames")) %>% 
@@ -74,7 +64,6 @@ link <- merge(link, names, by = c("permno", "datadate"), all.x = TRUE) %>%
   # save it as a tibble
   as_tibble()
 
-# save the two datasets - one a day by gvkey/permno combo file for any stock based method
-# and the other the full compustat universe with permno matched.
-saveRDS(link, here::here("Cleaned_Data", "gvkey_day_to_permno.rds"))
-saveRDS(comp, here::here("Cleaned_Data", "crsp_compustat_merged.rds"))
+# save the dataset
+saveRDS(link, here::here("Cleaned_Data", "permno_day_to_gvkey.rds"))
+
