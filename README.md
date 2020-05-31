@@ -8,10 +8,7 @@ This code takes the universe of annual compustat financial information and match
 
 2. MAKE PERMNO_TO_GVKEY
 
-This creates a file that has the associated compustat identifier (gvkey) for each permno/date combination where there is an identified gvkey. Because one firm might have multiple issued securities, this file should be longer than the unique gvkey/date combination file from CRSP_COMP_MERGED.
+This creates a file that has the associated compustat identifier (gvkey) for each permno/date combination. Because one firm might have multiple issued securities, this file should be longer than the unique gvkey/date combination file from CRSP_COMP_MERGED. In addition, there may be observations where there is a name and ticker associated with a permno, but where there is no compustat identifier (gvkey). These observations are retained, with gvkey being blank. 
 
-3. MAKE PERMNO_TO_NAME
-
-This creates a file that has identifying information (firm name, ticker) for each available permno/date combination. This may be longer than the file from PERMNO_TO_GVKEY because a permno may have trading dates where there is no associated GVKEY. 
 
 
