@@ -59,11 +59,10 @@ names <- names %>%
 
 setkey(names, permno, datadate)
 
-# merge in info to link file
-link <- merge(link, names, by = c("permno", "datadate"), all.x = TRUE) %>% 
+# merge in gvkey link info to the name file
+link <- merge(names, link, by = c("permno", "datadate"), all.x = TRUE) %>% 
   # save it as a tibble
   as_tibble()
 
 # save the dataset
 saveRDS(link, here::here("Cleaned_Data", "permno_day_to_gvkey.rds"))
-
