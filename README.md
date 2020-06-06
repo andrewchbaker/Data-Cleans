@@ -14,3 +14,7 @@ This creates a file that has the associated compustat identifier (gvkey) for eac
 3. FAMA_FRENCH_FACTORS
 
 This code makes the portfolio based Fama French Factors and was contributed by Gertjan Verdickt.
+
+4. SCRAPE_FF_INDS
+
+This code scrapes the Fama-French Industry definitions from Ken French's website. It uses the 12-industry FF definition, but you can swap out for any of the other industry classifications (e.g. 17, 48) in the url line.
