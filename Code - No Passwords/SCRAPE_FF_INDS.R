@@ -44,4 +44,4 @@ inds <- inds %>%
   mutate(sic_low = ifelse(name_id == 1, as.numeric(NA), as.numeric(str_sub(name, 1, str_locate(name, "-")[1] - 1))),
          sic_high = ifelse(name_id == 1, as.numeric(NA), as.numeric(str_sub(name, str_locate(name, "-")[1] + 1), nchar(name)))) %>%
   ungroup() %>%
-  select(ind_num, ind_abbrev, ind_name, sic_low, sic_high) %>%
+  select(ind_num, ind_abbrev, ind_name, sic_low, sic_high)
