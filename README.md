@@ -18,3 +18,13 @@ This code makes the portfolio based Fama French Factors and was contributed by G
 4. SCRAPE_FF_INDS
 
 This code scrapes the Fama-French Industry definitions from Ken French's website. It uses the 12-industry FF definition, but you can swap out for any of the other industry classifications (e.g. 17, 48) in the url line.
+
+5. MAKE_AMIHUD_ILLIQIDUITY MEASURE
+
+This code will make the Amihud (2002) Illiquidity measure by permno/calendar year (you can update it for different date ranges pretty easily if you so desire). This is measured as:
+
+$$AMIHUD_{iy} = \frac{\sum_{i = 1}^N 1000 \cdot \sqrt{\frac{\left|ret_it\right|}{\left| prc \right| \cdot vol}}}{N}$$
+
+6. MAKE_INST_SHARES 
+
+This code will calculate the number of shares held by institutional investors at the permno/quarter level using Thomson Reuters 13F holdings data. 
