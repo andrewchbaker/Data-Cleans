@@ -27,4 +27,4 @@ This code will make the Amihud (2002) Illiquidity measure by permno/calendar yea
 
 6. MAKE_INST_SHARES 
 
-This code will calculate the number of shares held by institutional investors at the permno/quarter level using Thomson Reuters 13F holdings data. 
+This code will calculate the number of shares held by institutional investors at the cusip/quarter level using Thomson Reuters 13F holdings data. 
