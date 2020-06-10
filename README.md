@@ -23,7 +23,7 @@ This code scrapes the Fama-French Industry definitions from Ken French's website
 
 This code will make the Amihud (2002) Illiquidity measure by permno/calendar year (you can update it for different date ranges pretty easily if you so desire). This is measured as:
 
-<img src="https://render.githubusercontent.com/render/math?math=AMIHUD_{iy} = \frac{\sum_{i = 1}^N 1000 \cdot \sqrt{\frac{\left|ret_{it}\right|}{\left| prc \right| \cdot vol}}}{N}">
+<img src="https://render.githubusercontent.com/render/math?math=AMIHUD_{iy} = \frac{\sum_{i = 1}^N 1000 \cdot \sqrt{\frac{\left|ret_{it}\right|}{\left| prc_{it} \right| \cdot vol_{it}}}}{N}">
 
 6. MAKE_INST_SHARES 
 
